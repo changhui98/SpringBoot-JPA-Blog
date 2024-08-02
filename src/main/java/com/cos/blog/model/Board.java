@@ -1,6 +1,7 @@
 package com.cos.blog.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,6 +44,9 @@ public class Board {
 	@ManyToOne // Many = Board, One = User 
 	@JoinColumn(name="userId")
 	private User user; // DB는 오브젝트를 저장할 수 없다(FK를 사용) . 자바는 오브젝트를 저장할 수 있다. 
+	
+	@OneToMany
+	private List<Reply> reply;
 	
 	@CreationTimestamp
 	private Timestamp createDate;
