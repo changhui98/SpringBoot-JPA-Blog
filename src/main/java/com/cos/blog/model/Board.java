@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,11 +42,11 @@ public class Board {
 	@ColumnDefault("0")
 	private int count; // 조회수 
 	
-	@ManyToOne // Many = Board, One = User 
+	@ManyToOne(fetch = FetchType.EAGER) // Many = Board, One = User 
 	@JoinColumn(name="userId")
 	private User user; // DB는 오브젝트를 저장할 수 없다(FK를 사용) . 자바는 오브젝트를 저장할 수 있다. 
 	
-	@OneToMany
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다(난 KF가 아니에요) DB에 칼럼을 만들지 마세요.
 	private List<Reply> reply;
 	
 	@CreationTimestamp
