@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
 	public String handleArgumentException(Exception e) {
 		return "<h1>" + e.getMessage() + "</h1>" ;
 	}
-	
+
 	
 
 }
