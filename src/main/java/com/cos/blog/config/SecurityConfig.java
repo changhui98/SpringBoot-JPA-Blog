@@ -16,14 +16,17 @@ import jakarta.security.auth.message.config.AuthConfig;
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소로 접근을 하면 권한 및 인증을 미리 체크하겠다는 뜻
 public class SecurityConfig  {
 	
-	@Bean
-	BCryptPasswordEncoder encode() {
+	@Bean // IoC가 됨.
+	public BCryptPasswordEncoder encodePWD() {
+		
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
 	SecurityFilterChain configure(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**", "/WEB-INF/**").permitAll()
+		http
+		.csrf().disable() // csrf 토큰 비활성화 (테스트시 걸어두는 게 좋음)
+		.authorizeHttpRequests(auth -> auth.requestMatchers("/","/auth/**", "/WEB-INF/**", "/js/**", "/css/**", "/image/**").permitAll()
 				.anyRequest().authenticated());
 		
 		http.formLogin(f -> f.loginPage("/auth/loginForm").permitAll());
