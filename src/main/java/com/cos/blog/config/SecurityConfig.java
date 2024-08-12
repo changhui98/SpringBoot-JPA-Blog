@@ -38,13 +38,19 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	SecurityFilterChain configure(HttpSecurity http) throws Exception {
-		http.csrf().disable() // csrf 토큰 비활성화 (테스트시 걸어두는 게 좋음)
-				.authorizeHttpRequests(
-						auth -> auth.requestMatchers("/", "/auth/**", "/WEB-INF/**", "/js/**", "/css/**", "/image/**")
-								.permitAll().anyRequest().authenticated());
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		// 1. csrf 비활성화 
+		http.csrf(c-> c.disable());
+		
+		// 2. 인증 주소 설정 (WEB-INF/** 추가해줘야 함. 아니면 인증이 필요한 주소를 무한 리다이렉션 일어남)
+		http.authorizeHttpRequests(
+				auth -> auth.requestMatchers("/", "/auth/**", "/WEB-INF/**", "/js/**", "/css/**", "/image/**")
+						.permitAll().anyRequest().authenticated());
 
-		http.formLogin(f -> f.loginPage("/auth/loginForm").permitAll());
+		// 3. 로그인 처리 프로세스 설정 
+		http.formLogin(f -> f.loginPage("/auth/loginForm")
+				.loginProcessingUrl("/auth/loginProc")
+				.defaultSuccessUrl("/"));
 
 		return http.build();
 	}
