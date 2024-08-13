@@ -36,10 +36,10 @@ public class Board {
 	@Column(nullable = false, length = 100)
 	private String title;
 	
-	@Lob // 대용량 데이터 
+	// @Lob // 대용량 데이터 -> 사진 이미지 첨부할 경우 TINYTEXT 으로 등록되어 에러남.
+	@Column(columnDefinition = "longblob")
 	private String content; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.  
 
-	@ColumnDefault("0")
 	private int count; // 조회수 
 	
 	@ManyToOne(fetch = FetchType.EAGER) // Many = Board, One = User 

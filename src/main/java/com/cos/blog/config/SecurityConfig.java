@@ -25,6 +25,7 @@ public class SecurityConfig {
 
 	// ** spring security update : principalDetailService 제거
 
+	// 4. AuthenticationManager 메서드 생성 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration anthenAuthenticationConfiguration)
 			throws Exception {
@@ -36,6 +37,10 @@ public class SecurityConfig {
 
 		return new BCryptPasswordEncoder();
 	}
+	
+	// 시큐리티가 대신 로그인해주는데 password를 가로채기를 하는데
+	// 해당 password가 뭘로 해쉬가 되어 회원가입이 되었는지 알아야 
+	// 같은 해쉬로 암호화해서 DB에 있는 해쉬랑 비교할 수 있음.
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
