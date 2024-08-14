@@ -49,7 +49,7 @@ public class SecurityConfig {
 		
 		// 2. 인증 주소 설정 (WEB-INF/** 추가해줘야 함. 아니면 인증이 필요한 주소를 무한 리다이렉션 일어남)
 		http.authorizeHttpRequests(
-				auth -> auth.requestMatchers("/", "/auth/**", "/WEB-INF/**", "/js/**", "/css/**", "/image/**")
+				auth -> auth.requestMatchers("/", "/auth/**", "/WEB-INF/**", "/js/**", "/css/**", "/image/**", "/dummy/**")
 						.permitAll().anyRequest().authenticated());
 
 		// 3. 로그인 처리 프로세스 설정 
