@@ -6,17 +6,15 @@
 
 	<form>
 		<div class="form-group">
-			<label for="title">Title : </label> 
-			<input type="text" class="form-control" placeholder="Enter Title" id="title">
+			<input value="${board.title }" type="text" class="form-control" placeholder="Enter Title" id="title">
 		</div>
 
 		<div class="form-group">
-			<label for="content">Content : </label>
-			<textarea class="form-control summernote" rows="5" id="content"></textarea>
+			<textarea class="form-control summernote" rows="5" id="content">${board.content }</textarea>
 		</div>
 	</form>
 	
-	<button id="btn-save" class="btn btn-primary">Save</button>
+	<button id="btn-update" class="btn btn-primary">수정하기</button>
 
 </div>
 
