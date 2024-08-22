@@ -5,6 +5,7 @@
 <div class="container">
 
 	<form>
+		<input type="hidden" id="id" value="${board.id }">
 		<div class="form-group">
 			<input value="${board.title }" type="text" class="form-control" placeholder="Enter Title" id="title">
 		</div>
